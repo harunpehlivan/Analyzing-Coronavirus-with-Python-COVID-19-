@@ -28,7 +28,7 @@ for day in range(1, len(confirmed)):
 
 active_cases = confirmed.copy()
 
-for day in range(0, len(confirmed)):
+for day in range(len(confirmed)):
     active_cases.iloc[day] = confirmed.iloc[day] - deaths.iloc[day] - recovered.iloc[day]
 
 overall_growth_rate = confirmed.copy()
@@ -38,13 +38,13 @@ for day in range(1, len(confirmed)):
 
 death_rate = confirmed.copy()
 
-for day in range(0, len(confirmed)):
+for day in range(len(confirmed)):
     death_rate.iloc[day] = (deaths.iloc[day] / confirmed.iloc[day]) * 100
     hospitalization_rate_estimate = 0.05
 
 hospitalization_needed = confirmed.copy()
 
-for day in range(0, len(confirmed)):
+for day in range(len(confirmed)):
     hospitalization_needed.iloc[day] = active_cases.iloc[day] * hospitalization_rate_estimate
     estimated_death_rate = 0.03
 print(deaths['Italy'].tail()[4] / estimated_death_rate)
@@ -59,7 +59,7 @@ ax.legend(loc="upper left")
 countries = ['Austria', 'Italy', 'US', 'Spain', 'China', 'Germany', 'India']
 
 for country in countries:
-    confirmed[country][0:].plot(label = country)
+    confirmed[country][:].plot(label = country)
 
 plt.legend(loc='upper left')
 plt.show()
